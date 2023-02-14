@@ -119,6 +119,7 @@ If you are running Fedora Silverblue, you will need to run these additional step
 sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
 # Manually copy the services
 sudo cp /var/lib/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
+# R = recurse, F = full context (not just target)
 sudo restorecon -RF /nix
 # Ensure systemd picks up the newly created units
 sudo systemctl daemon-reload
