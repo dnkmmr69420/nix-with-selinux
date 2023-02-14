@@ -26,7 +26,7 @@ If you are running Fedora Silverblue, you will need to follow these extra steps.
 
 ### Create the nix directory in a persistent location
 ```bash
-sudo mkdir /var/nix
+sudo mkdir /var/lib/nix
 ```
 
 ### SELinux
@@ -34,14 +34,14 @@ sudo mkdir /var/nix
 You will want to the SELinux contexts for the mounted directory paths as well, it seems to help avoid some weird issues periodically.
 
 ```bash
-sudo semanage fcontext -a -t etc_t '/var/nix/store/[^/]+/etc(/.*)?'
-sudo semanage fcontext -a -t lib_t '/var/nix/store/[^/]+/lib(/.*)?'
-sudo semanage fcontext -a -t systemd_unit_file_t '/var/nix/store/[^/]+/lib/systemd/system(/.*)?'
-sudo semanage fcontext -a -t man_t '/var/nix/store/[^/]+/man(/.*)?'
-sudo semanage fcontext -a -t bin_t '/var/nix/store/[^/]+/s?bin(/.*)?'
-sudo semanage fcontext -a -t usr_t '/var/nix/store/[^/]+/share(/.*)?'
-sudo semanage fcontext -a -t var_run_t '/var/nix/var/nix/daemon-socket(/.*)?'
-sudo semanage fcontext -a -t usr_t '/var/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
+sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?'
+sudo semanage fcontext -a -t lib_t '/var/lib/nix/store/[^/]+/lib(/.*)?'
+sudo semanage fcontext -a -t systemd_unit_file_t '/var/lib/nix/store/[^/]+/lib/systemd/system(/.*)?'
+sudo semanage fcontext -a -t man_t '/var/lib/nix/store/[^/]+/man(/.*)?'
+sudo semanage fcontext -a -t bin_t '/var/lib/nix/store/[^/]+/s?bin(/.*)?'
+sudo semanage fcontext -a -t usr_t '/var/lib/nix/store/[^/]+/share(/.*)?'
+sudo semanage fcontext -a -t var_run_t '/var/lib/nix/var/nix/daemon-socket(/.*)?'
+sudo semanage fcontext -a -t usr_t '/var/lib/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
 ### `/etc/systemd/system/mkdir-rootfs@.service`
@@ -72,7 +72,7 @@ After=ostree-remount.service
 BindsTo=var.mount
 
 [Mount]
-What=/var/nix
+What=/var/lib/nix
 Where=/nix
 Options=bind
 Type=none
@@ -94,8 +94,19 @@ sudo restorecon -RF /nix
 
 After you have configured SELinux (and if you are on Silverblue, configured a `/nix` mount), it's time to install [Nix](https://github.com/NixOS/nix).
 
+Temorarly set selinux to "permissive"
+
+```bash
+sudo setenforce Permissive
+```
+
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+Enable selinux
+
+```bash
+sudo setenforce Enforcing
 ```
 
 If you are running Fedora Workstation, you are now ready to rock!  If you are running Fedora Silverblue, you will need to do some additional configuration.
@@ -110,7 +121,7 @@ If you are running Fedora Silverblue, you will need to run these additional step
 # Remove the linked services
 sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
 # Manually copy the services
-sudo cp /var/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
+sudo cp /var/lib/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
 # Ensure systemd picks up the newly created units
 sudo systemctl daemon-reload
 # Start (and enable) the nix-daemon socket
