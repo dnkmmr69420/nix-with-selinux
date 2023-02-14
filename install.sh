@@ -87,4 +87,4 @@ sudo systemctl enable --now nix-daemon.socket
 # Sets selinux back to enforcing
 sudo setenforce Enforcing
 
-echo "reboot your system by typing "systemctl reboot""
+echo "reboot your system by typing "systemctl reboot"
