@@ -133,6 +133,12 @@ Enable selinux
 sudo setenforce Enforcing
 ```
 
+reboot the system for the changes to take effect
+
+```bash
+systemctl reboot
+```
+
 Optionally, you may manually modify the `nix-daemon` units to add a bind to `nix.mount` to ensure the units activate and deactivate properly if the mount fails or if the mount is unmounted while the daemon is running.  Place the following at the bottom of the `[Unit]` section in both the `nix-daemon.socket` and `nix-daemon.service` units.
 
 ```
