@@ -105,11 +105,6 @@ Install nix
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
-Enable selinux
-
-```bash
-sudo setenforce Enforcing
-```
 
 If you are running Fedora Workstation, you are now ready to rock!  If you are running Fedora Silverblue, you will need to do some additional configuration.
 
@@ -128,6 +123,12 @@ sudo cp /var/lib/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{ser
 sudo systemctl daemon-reload
 # Start (and enable) the nix-daemon socket
 sudo systemctl enable --now nix-daemon.socket
+```
+
+Enable selinux
+
+```bash
+sudo setenforce Enforcing
 ```
 
 Optionally, you may manually modify the `nix-daemon` units to add a bind to `nix.mount` to ensure the units activate and deactivate properly if the mount fails or if the mount is unmounted while the daemon is running.  Place the following at the bottom of the `[Unit]` section in both the `nix-daemon.socket` and `nix-daemon.service` units.
