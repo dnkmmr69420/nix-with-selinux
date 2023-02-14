@@ -1,4 +1,4 @@
-# NixOS on Fedora
+# Nix package manager on Fedora
 
 Please note that these instructions are not offically supported or condoned by Nix and are not guaranteed to always work, but from my testing everything seems to work perfectly fine.
 
