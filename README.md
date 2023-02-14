@@ -2,6 +2,8 @@
 
 Please note that these instructions are not offically supported or condoned by Nix and are not guaranteed to always work, but from my testing everything seems to work perfectly fine.
 
+This is my modified version of the documentation [here](https://gist.github.com/matthewpi/08c3d652e7879e4c4c30bead7021ff73)
+
 These steps may not be required if https://github.com/NixOS/nix/issues/2374 is resolved.
 
 ## SELinux
