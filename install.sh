@@ -70,3 +70,21 @@ sudo restorecon -RF /nix
 # Temporarly sets selinux to permissive
 sudo setenforce Permissive
 
+# Install nix
+sh <(curl -L https://nixos.org/nix/install) --daemon
+
+# Remove the linked services
+sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
+# Manually copy the services
+sudo cp /var/lib/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
+# R = recurse, F = full context (not just target)
+sudo restorecon -RF /nix
+# Ensure systemd picks up the newly created units
+sudo systemctl daemon-reload
+# Start (and enable) the nix-daemon socket
+sudo systemctl enable --now nix-daemon.socket
+
+# Sets selinux back to enforcing
+sudo setenforce Enforcing
+
+echo "reboot your system by typing "systemctl reboot""
