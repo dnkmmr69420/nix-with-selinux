@@ -100,6 +100,8 @@ Temorarly set selinux to "permissive"
 sudo setenforce Permissive
 ```
 
+Install nix
+
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
