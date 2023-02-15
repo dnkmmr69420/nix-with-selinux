@@ -140,6 +140,7 @@ sudo restorecon -RF /nix
 sudo systemctl daemon-reload
 # Start (and enable) the nix-daemon socket
 sudo systemctl enable --now nix-daemon.socket
+```
 
 ### Enable selinux
 
