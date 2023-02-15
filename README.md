@@ -114,9 +114,7 @@ If you are running Fedora Workstation, go to [Workstation](#workstation). If you
 
 ### Fedora Silverblue
 
-If you are running Fedora Silverblue, you will need to run these additional steps.  Most likely the installation errored out while setting up systemd.  SELinux on Silverblue prevents systemd from loading the units linked by Nix, while the best solution would be to add a policy or package Nix as an RPM, we will just manually copy the units ourselves.
-
-*TODO: Find a way to link the units, that way whenever Nix is updated you don't need to manually edit or copy the units.*
+If you are running Fedora Silverblue, follow these steps below.
 
 ```bash
 # Remove the linked services
@@ -132,6 +130,9 @@ sudo systemctl enable --now nix-daemon.socket
 ```
 
 ### Workstation
+
+If you are on workstation, follow these steps below
+
 ```bash
 # Remove the linked services
 sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
