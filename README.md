@@ -8,6 +8,12 @@ This is my modified version of the documentation [here](https://gist.github.com/
 
 These steps may not be required if https://github.com/NixOS/nix/issues/2374 is resolved.
 
+When this happens sucessfully for your, report it to [Issues](https://github.com/dnkmmr69420/nix-with-selinux/issues) as a [successfull test](https://github.com/dnkmmr69420/nix-with-selinux/issues/new?assignees=&labels=successful+test&template=successful-test.md&title=)
+
+When this fails for you, report it as a [bug](https://github.com/dnkmmr69420/nix-with-selinux/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
+
+Want to improve this documentation, submit a [request](https://github.com/dnkmmr69420/nix-with-selinux/issues/new?assignees=&labels=&template=improvements-requests.md&title=)
+
 ## SELinux
 
 These commands are required for both Fedora Workstation and Fedora Silverblue
