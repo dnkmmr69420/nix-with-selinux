@@ -110,7 +110,7 @@ Install nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-If you are running Fedora Workstation, go to [Workstation](https://github.com/dnkmmr69420/nix-with-selinux#workstation). If you are on Silverblue go to [Fedora Silverblue](https://github.com/dnkmmr69420/nix-with-selinux#fedora-silverblue-1).
+If you are running Fedora Workstation, go to [Workstation](#workstation). If you are on Silverblue go to [Fedora Silverblue](#fedora-silverblue-1).
 
 ### Fedora Silverblue
 
