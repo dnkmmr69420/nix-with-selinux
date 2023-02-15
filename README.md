@@ -116,7 +116,7 @@ Install nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-### Copy Service Files
+## Copy Service Files
 
 now copy the service file
 
