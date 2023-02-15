@@ -110,7 +110,7 @@ Install nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-If you are running Fedora Workstation, you are now ready to rock!  If you are running Fedora Silverblue, you will need to do some additional configuration.
+If you are running Fedora Workstation, go to [Workstation](https://github.com/dnkmmr69420/nix-with-selinux#workstation). If you are on Silverblue go to [Fedora Silverblue](https://github.com/dnkmmr69420/nix-with-selinux#fedora-silverblue-1).
 
 ### Fedora Silverblue
 
@@ -144,6 +144,9 @@ sudo systemctl daemon-reload
 # Start (and enable) the nix-daemon socket
 sudo systemctl enable --now nix-daemon.socket
 ```
+
+
+## This part is for both workstation and silverblue
 
 Enable selinux
 
