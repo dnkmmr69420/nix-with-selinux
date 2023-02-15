@@ -131,6 +131,20 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now nix-daemon.socket
 ```
 
+### Workstation
+```bash
+# Remove the linked services
+sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
+# Manually copy the services
+sudo cp /nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
+# R = recurse, F = full context (not just target)
+sudo restorecon -RF /nix
+# Ensure systemd picks up the newly created units
+sudo systemctl daemon-reload
+# Start (and enable) the nix-daemon socket
+sudo systemctl enable --now nix-daemon.socket
+```
+
 Enable selinux
 
 ```bash
