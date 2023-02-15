@@ -110,28 +110,9 @@ Install nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-If you are running Fedora Workstation, go to [Workstation](#workstation). If you are on Silverblue go to [Fedora Silverblue](#fedora-silverblue-1).
+### Copy Service Files
 
-### Fedora Silverblue
-
-If you are running Fedora Silverblue, follow these steps below.
-
-```bash
-# Remove the linked services
-sudo rm -f /etc/systemd/system/nix-daemon.{service,socket}
-# Manually copy the services
-sudo cp /var/lib/nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/
-# R = recurse, F = full context (not just target)
-sudo restorecon -RF /nix
-# Ensure systemd picks up the newly created units
-sudo systemctl daemon-reload
-# Start (and enable) the nix-daemon socket
-sudo systemctl enable --now nix-daemon.socket
-```
-
-### Workstation
-
-If you are on workstation, follow these steps below
+now copy the service file
 
 ```bash
 # Remove the linked services
@@ -147,9 +128,7 @@ sudo systemctl enable --now nix-daemon.socket
 ```
 
 
-## This part is for both workstation and silverblue
-
-Enable selinux
+### Enable selinux
 
 ```bash
 sudo setenforce Enforcing
