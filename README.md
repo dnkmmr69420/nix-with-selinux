@@ -176,3 +176,10 @@ BindsTo=nix.mount
 You have just installed Nix and should be ready to rock!
 
 NOTE: the `nix-daemon.socket` unit will automatically start `nix-daemon.service` whenever it is needed, there is no need to enable or manually start the service.
+
+## Distros that I have tested this on
+
+1. Fedora Silverblue 37: Multiple Times: Successful
+2. Fedora Workstation 37: Once: Successful
+3. Centos 7: Once: Successful
+4. Rocky Linux 9.1: Once: Successful
