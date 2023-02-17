@@ -233,7 +233,9 @@ reboot the system for the changes to take effect
 systemctl reboot
 ```
 
-## Optional Step
+## Optional Steps
+
+### modify nix-daemon to add units to bind nix.mount
 
 Optionally, you may manually modify the `nix-daemon` units to add a bind to `nix.mount` to ensure the units activate and deactivate properly if the mount fails or if the mount is unmounted while the daemon is running.  Place the following at the bottom of the `[Unit]` section in both the `nix-daemon.socket` and `nix-daemon.service` units.
 
@@ -245,6 +247,18 @@ BindsTo=nix.mount
 You have just installed Nix and should be ready to rock!
 
 NOTE: the `nix-daemon.socket` unit will automatically start `nix-daemon.service` whenever it is needed, there is no need to enable or manually start the service.
+
+### Edit /etc/nix/nix.conf to enable flakes and profile package manager
+
+I find the `nix profile` package manager much better than `nix-env
+
+edit `/etc/nix/nix.conf` and add this
+
+```
+experimental-features = nix-command flakes
+```
+
+now you can use the `nix profile` command and I think it is better than `nix-env`
 
 ## Distros that I have tested this on
 
