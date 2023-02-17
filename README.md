@@ -118,7 +118,6 @@ What=/var/lib/nix
 Where=/nix
 Options=bind
 Type=none
-EOF
 ```
 
 This one is experimental but this does it with the tee command. copy and paste it into the terminal. Don't do it if you already used a text editor to copy and paste the `nix.mount` with a text editor.
@@ -139,6 +138,7 @@ What=/var/lib/nix
 Where=/nix
 Options=bind
 Type=none
+EOF
 ```
 
 ### Step 6
