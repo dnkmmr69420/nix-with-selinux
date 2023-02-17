@@ -155,6 +155,12 @@ sudo systemctl start nix.mount
 sudo restorecon -RF /nix
 ```
 
+Run all of this in one command
+
+```bash
+sudo systemctl daemon-reload && sudo systemctl enable nix.mount && sudo systemctl start nix.mount && sudo restorecon -RF /nix
+```
+
 ## Install Nix
 
 After you have configured SELinux (and if you are on Silverblue, configured a `/nix` mount), it's time to install [Nix](https://github.com/NixOS/nix).
@@ -189,6 +195,11 @@ sudo restorecon -RF /nix
 sudo systemctl daemon-reload
 # Start (and enable) the nix-daemon socket
 sudo systemctl enable --now nix-daemon.socket
+```
+run all of this in one command
+
+```bash
+sudo rm -f /etc/systemd/system/nix-daemon.{service,socket} && sudo cp /nix/var/nix/profiles/default/lib/systemd/system/nix-daemon.{service,socket} /etc/systemd/system/ && sudo restorecon -RF /nix && sudo systemctl daemon-reload && sudo systemctl enable --now nix-daemon.socket
 ```
 
 If you are running silverblue and the services failed to copy, try this instead. instead copying from /nix, it coppies from /var/lib/nix instead.
