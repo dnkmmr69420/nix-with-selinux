@@ -14,7 +14,7 @@ When this fails for you, report it as a [bug](https://github.com/dnkmmr69420/nix
 
 Want to improve this documentation, submit a [request](https://github.com/dnkmmr69420/nix-with-selinux/issues/new?assignees=&labels=&template=improvements-requests.md&title=)
 
-## SELinux
+## Step 1 SELinux
 
 These commands are required for both Fedora Workstation and Fedora Silverblue
 ```bash
@@ -34,18 +34,18 @@ This part is very experimental but this will run everything in one command
 sudo semanage fcontext -a -t etc_t '/nix/store/[^/]+/etc(/.*)?' && sudo semanage fcontext -a -t lib_t '/nix/store/[^/]+/lib(/.*)?' && sudo semanage fcontext -a -t systemd_unit_file_t '/nix/store/[^/]+/lib/systemd/system(/.*)?' && sudo semanage fcontext -a -t man_t '/nix/store/[^/]+/man(/.*)?' && sudo semanage fcontext -a -t bin_t '/nix/store/[^/]+/s?bin(/.*)?' && sudo semanage fcontext -a -t usr_t '/nix/store/[^/]+/share(/.*)?' && sudo semanage fcontext -a -t var_run_t '/nix/var/nix/daemon-socket(/.*)?' && sudo semanage fcontext -a -t usr_t '/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
-If you are on Fedora Workstation, skip past the [Fedora Silverblue](#fedora-silverblue) section down to [Install Nix](#install-nix)
+If you are on Fedora Workstation, skip past the [Fedora Silverblue](#fedora-silverblue) down to step 7, [Install Nix](#install-nix)
 
 ## Fedora Silverblue
 
 If you are running Fedora Silverblue, you will need to follow these extra steps.
 
-### Create the nix directory in a persistent location
+### Step 2 Create the nix directory in a persistent location
 ```bash
 sudo mkdir /var/lib/nix
 ```
 
-### SELinux
+### Step 3 SELinux
 
 You will want to the SELinux contexts for the mounted directory paths as well, it seems to help avoid some weird issues periodically.
 
@@ -66,7 +66,7 @@ This part is very experimental but this will run everything in one command
 sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?' && sudo semanage fcontext -a -t lib_t '/var/lib/nix/store/[^/]+/lib(/.*)?' && sudo semanage fcontext -a -t systemd_unit_file_t '/var/lib/nix/store/[^/]+/lib/systemd/system(/.*)?' && sudo semanage fcontext -a -t man_t '/var/lib/nix/store/[^/]+/man(/.*)?' && sudo semanage fcontext -a -t bin_t '/var/lib/nix/store/[^/]+/s?bin(/.*)?' && sudo semanage fcontext -a -t usr_t '/var/lib/nix/store/[^/]+/share(/.*)?' && sudo semanage fcontext -a -t var_run_t '/var/lib/nix/var/nix/daemon-socket(/.*)?' && sudo semanage fcontext -a -t usr_t '/var/lib/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
-### `/etc/systemd/system/mkdir-rootfs@.service`
+### Step 4 `/etc/systemd/system/mkdir-rootfs@.service`
 ```unit file (systemd)
 [Unit]
 Description=Enable mount points in / for ostree
@@ -82,7 +82,7 @@ ExecStart=mkdir -p '%f'
 ExecStopPost=chattr +i /
 ```
 
-### `/etc/systemd/system/nix.mount`
+### Step 5 `/etc/systemd/system/nix.mount`
 ```unit file (systemd)
 [Unit]
 Description=Nix Package Manager
@@ -100,6 +100,8 @@ Options=bind
 Type=none
 ```
 
+### Step 6
+
 Enable and mount the nix mount and reset the SELinux context. 
 ```bash
 # Ensure systemd picks up the newly created units
@@ -116,19 +118,22 @@ sudo restorecon -RF /nix
 
 After you have configured SELinux (and if you are on Silverblue, configured a `/nix` mount), it's time to install [Nix](https://github.com/NixOS/nix).
 
+### Step 7
+
 Temorarly set selinux to "permissive"
 
 ```bash
 sudo setenforce Permissive
 ```
 
-Install nix
+
+### Step 8 Install nix
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-## Copy Service Files
+## Step 9 Copy Service Files
 
 now copy the service file
 
@@ -162,13 +167,13 @@ sudo systemctl enable --now nix-daemon.socket
 
 ## Finishing up
 
-### Enable selinux
+### Step 10 Enable selinux
 
 ```bash
 sudo setenforce Enforcing
 ```
 
-### Reboot your system
+### Step 11 Reboot your system
 
 reboot the system for the changes to take effect
 
