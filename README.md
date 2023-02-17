@@ -66,6 +66,8 @@ This part is very experimental but this will run everything in one command
 sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?' && sudo semanage fcontext -a -t lib_t '/var/lib/nix/store/[^/]+/lib(/.*)?' && sudo semanage fcontext -a -t systemd_unit_file_t '/var/lib/nix/store/[^/]+/lib/systemd/system(/.*)?' && sudo semanage fcontext -a -t man_t '/var/lib/nix/store/[^/]+/man(/.*)?' && sudo semanage fcontext -a -t bin_t '/var/lib/nix/store/[^/]+/s?bin(/.*)?' && sudo semanage fcontext -a -t usr_t '/var/lib/nix/store/[^/]+/share(/.*)?' && sudo semanage fcontext -a -t var_run_t '/var/lib/nix/var/nix/daemon-socket(/.*)?' && sudo semanage fcontext -a -t usr_t '/var/lib/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
+## Service files
+
 ### Step 4 `/etc/systemd/system/mkdir-rootfs@.service`
 ```unit file (systemd)
 [Unit]
@@ -81,9 +83,47 @@ ExecStartPre=chattr -i /
 ExecStart=mkdir -p '%f'
 ExecStopPost=chattr +i /
 ```
+This one is experimental but this does it with the tee command. copy and paste it into the terminal. Don't do it if you already used a text editor to copy and paste the `mkdir-rootfs@.service` with a text editor.
+
+```bash
+sudo tee /etc/systemd/system/mkdir-rootfs@.service <<EOF
+[Unit]
+Description=Enable mount points in / for ostree
+ConditionPathExists=!%f
+DefaultDependencies=no
+Requires=local-fs-pre.target
+After=local-fs-pre.target
+
+[Service]
+Type=oneshot
+ExecStartPre=chattr -i /
+ExecStart=mkdir -p '%f'
+ExecStopPost=chattr +i /
+EOF
+```
 
 ### Step 5 `/etc/systemd/system/nix.mount`
 ```unit file (systemd)
+[Unit]
+Description=Nix Package Manager
+DefaultDependencies=no
+After=mkdir-rootfs@nix.service
+Wants=mkdir-rootfs@nix.service
+Before=sockets.target
+After=ostree-remount.service
+BindsTo=var.mount
+
+[Mount]
+What=/var/lib/nix
+Where=/nix
+Options=bind
+Type=none
+```
+
+This one is experimental but this does it with the tee command. copy and paste it into the terminal. Don't do it if you already used a text editor to copy and paste the `nix.mount` with a text editor.
+
+```bash
+sudo tee /etc/systemd/system/nix.mount <<EOF
 [Unit]
 Description=Nix Package Manager
 DefaultDependencies=no
