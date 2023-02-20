@@ -252,7 +252,7 @@ NOTE: the `nix-daemon.socket` unit will automatically start `nix-daemon.service`
 
 ### Edit /etc/nix/nix.conf to enable flakes and profile package manager
 
-I find the `nix profile` package manager much better than `nix-env
+I find the `nix profile` package manager much better than `nix-env`
 
 edit `/etc/nix/nix.conf` and add this
 
