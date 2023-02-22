@@ -260,6 +260,28 @@ experimental-features = nix-command flakes
 
 now you can use the `nix profile` command and I think it is better than `nix-env`
 
+### nix graphical icons
+
+It has its own [guide](https://github.com/dnkmmr69420/nix-graphical-app-icon-guide)
+
+#### Single User
+
+add this to the end of `~/.bashrc`
+
+```bash
+XDG_DATA_DIRS="$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
+```
+
+#### Multiuser
+
+type this command
+
+```bash
+sudo tee /etc/profile.d/nix-app-icons.sh <<EOF
+XDG_DATA_DIRS="$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
+EOF
+```
+
 ## Distros that I have tested this on
 
 1. Fedora Silverblue 37: Multiple Times: Successful
