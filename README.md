@@ -1,6 +1,6 @@
 # Nix package manager on Fedora with selinux enabled 
 
-(also works for RHEl and its clones too)
+(also works for RHEL and its clones too)
 
 Please note that these instructions are not offically supported or condoned by Nix and are not guaranteed to always work, but from my testing everything seems to work perfectly fine.
 
