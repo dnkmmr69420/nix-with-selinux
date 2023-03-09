@@ -10,6 +10,15 @@ sudo setenforce Permissive
 
 sleep 1
 
+echo "making SSL Certs"
+
+sudo mkdir /etc/systemd/system/nix-daemon.service.d
+
+sudo tee /etc/systemd/system/nix-daemon.service.d/override.conf <<EOF
+[Service]
+Environment="NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt"
+EOF
+
 echo "Preparring the nix install script"
 
 sleep 5
