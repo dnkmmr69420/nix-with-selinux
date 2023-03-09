@@ -34,18 +34,32 @@ this will run everything in one command
 sudo semanage fcontext -a -t etc_t '/nix/store/[^/]+/etc(/.*)?' ; sudo semanage fcontext -a -t lib_t '/nix/store/[^/]+/lib(/.*)?' ; sudo semanage fcontext -a -t systemd_unit_file_t '/nix/store/[^/]+/lib/systemd/system(/.*)?' ; sudo semanage fcontext -a -t man_t '/nix/store/[^/]+/man(/.*)?' ; sudo semanage fcontext -a -t bin_t '/nix/store/[^/]+/s?bin(/.*)?' ; sudo semanage fcontext -a -t usr_t '/nix/store/[^/]+/share(/.*)?' ; sudo semanage fcontext -a -t var_run_t '/nix/var/nix/daemon-socket(/.*)?' ; sudo semanage fcontext -a -t usr_t '/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
+### Step 2 create SSL cert file
+
+```bash
+sudo mkdir /etc/systemd/system/nix-daemon.service.d
+```
+
+
+```bash
+sudo tee /etc/systemd/system/nix-daemon.service.d/override.conf <<EOF
+[Service]
+Environment="NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt"
+EOF
+```
+
 If you are on Fedora Workstation, skip past the [Fedora Silverblue](#fedora-silverblue) down to step 8, [Install Nix](#install-nix)
 
 ## Fedora Silverblue
 
 If you are running Fedora Silverblue, you will need to follow these extra steps.
 
-### Step 2 Create the nix directory in a persistent location
+### Step 3 Create the nix directory in a persistent location
 ```bash
 sudo mkdir /var/lib/nix
 ```
 
-### Step 3 SELinux
+### Step 4 SELinux
 
 You will want to the SELinux contexts for the mounted directory paths as well, it seems to help avoid some weird issues periodically.
 
@@ -67,19 +81,6 @@ sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?' ; sudo s
 ```
 
 ## Service files
-
-### Step 4 create SSL cert file
-
-```bash
-sudo mkdir /etc/systemd/system/nix-daemon.service.d
-```
-
-```bash
-sudo tee /etc/systemd/system/nix-daemon.service.d/override.conf <<EOF
-[Service]
-Environment="NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt"
-EOF
-```
 
 
 ### Step 5 `/etc/systemd/system/mkdir-rootfs@.service`
