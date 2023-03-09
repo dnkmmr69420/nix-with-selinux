@@ -14,6 +14,14 @@ When this fails for you, report it as a [bug](https://github.com/dnkmmr69420/nix
 
 Want to improve this documentation, submit a [request](https://github.com/dnkmmr69420/nix-with-selinux/issues/new?assignees=&labels=&template=improvements-requests.md&title=)
 
+# Install Scripts
+
+Copy and paste this if you are on a mutable os with selinux enabled/installed
+
+```bash
+wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular-installer.sh && chmod a+x ./regular-installer.sh && ./regular-installer.sh ; rm ./regular-installer.sh
+```
+
 ## Step 1 SELinux
 
 These commands are required for both Fedora Workstation and Fedora Silverblue
