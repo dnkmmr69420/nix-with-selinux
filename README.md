@@ -16,11 +16,15 @@ Want to improve this documentation, submit a [request](https://github.com/dnkmmr
 
 # Install Scripts
 
-Copy and paste this if you are on a mutable os with selinux enabled/installed
+Copy and paste the correct installer for your linux distro into the terminal to install
+
+## Regular installer for mutable linux with selinux
 
 ```bash
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular-installer.sh && chmod a+x ./regular-installer.sh && ./regular-installer.sh ; rm ./regular-installer.sh
 ```
+
+## Nix installer for silverblue
 
 ```bash
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverblue-installer.sh && chmod a+x ./silverblue-installer.sh && ./silverblue-installer.sh ; rm ./silverblue-installer.sh
