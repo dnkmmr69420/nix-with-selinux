@@ -22,6 +22,12 @@ Copy and paste this if you are on a mutable os with selinux enabled/installed
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular-installer.sh && chmod a+x ./regular-installer.sh && ./regular-installer.sh ; rm ./regular-installer.sh
 ```
 
+```bash
+wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverblue-installer.sh && chmod a+x ./silverblue-installer.sh && ./silverblue-installer.sh ; rm ./silverblue-installer.sh
+```
+
+# Manual Steps
+
 ## Step 1 SELinux
 
 These commands are required for both Fedora Workstation and Fedora Silverblue
