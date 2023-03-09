@@ -28,7 +28,7 @@ sudo semanage fcontext -a -t var_run_t '/nix/var/nix/daemon-socket(/.*)?'
 sudo semanage fcontext -a -t usr_t '/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
-This part is very experimental but this will run everything in one command
+this will run everything in one command
 
 ```bash
 sudo semanage fcontext -a -t etc_t '/nix/store/[^/]+/etc(/.*)?' ; sudo semanage fcontext -a -t lib_t '/nix/store/[^/]+/lib(/.*)?' ; sudo semanage fcontext -a -t systemd_unit_file_t '/nix/store/[^/]+/lib/systemd/system(/.*)?' ; sudo semanage fcontext -a -t man_t '/nix/store/[^/]+/man(/.*)?' ; sudo semanage fcontext -a -t bin_t '/nix/store/[^/]+/s?bin(/.*)?' ; sudo semanage fcontext -a -t usr_t '/nix/store/[^/]+/share(/.*)?' ; sudo semanage fcontext -a -t var_run_t '/nix/var/nix/daemon-socket(/.*)?' ; sudo semanage fcontext -a -t usr_t '/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
@@ -60,7 +60,7 @@ sudo semanage fcontext -a -t var_run_t '/var/lib/nix/var/nix/daemon-socket(/.*)?
 sudo semanage fcontext -a -t usr_t '/var/lib/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
 ```
 
-This part is very experimental but this will run everything in one command
+This will run everything in one command
 
 ```bash
 sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?' ; sudo semanage fcontext -a -t lib_t '/var/lib/nix/store/[^/]+/lib(/.*)?' ; sudo semanage fcontext -a -t systemd_unit_file_t '/var/lib/nix/store/[^/]+/lib/systemd/system(/.*)?' ; sudo semanage fcontext -a -t man_t '/var/lib/nix/store/[^/]+/man(/.*)?' ; sudo semanage fcontext -a -t bin_t '/var/lib/nix/store/[^/]+/s?bin(/.*)?' ; sudo semanage fcontext -a -t usr_t '/var/lib/nix/store/[^/]+/share(/.*)?' ; sudo semanage fcontext -a -t var_run_t '/var/lib/nix/var/nix/daemon-socket(/.*)?' ; sudo semanage fcontext -a -t usr_t '/var/lib/nix/var/nix/profiles(/per-user/[^/]+)?/[^/]+'
@@ -68,7 +68,21 @@ sudo semanage fcontext -a -t etc_t '/var/lib/nix/store/[^/]+/etc(/.*)?' ; sudo s
 
 ## Service files
 
-### Step 4 `/etc/systemd/system/mkdir-rootfs@.service`
+### Step 4 create SSL cert file
+
+```bash
+sudo mkdir /etc/systemd/system/nix-daemon.service.d
+```
+
+```bash
+sudo tee /etc/systemd/system/nix-daemon.service.d/override.conf <<EOF
+[Service]
+Environment="NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt"
+EOF
+```
+
+
+### Step 5 `/etc/systemd/system/mkdir-rootfs@.service`
 ```unit file (systemd)
 [Unit]
 Description=Enable mount points in / for ostree
@@ -102,7 +116,7 @@ ExecStopPost=chattr +i /
 EOF
 ```
 
-### Step 5 `/etc/systemd/system/nix.mount`
+### Step 6 `/etc/systemd/system/nix.mount`
 ```unit file (systemd)
 [Unit]
 Description=Nix Package Manager
@@ -141,7 +155,7 @@ Type=none
 EOF
 ```
 
-### Step 6
+### Step 7
 
 Enable and mount the nix mount and reset the SELinux context. 
 ```bash
@@ -165,7 +179,7 @@ sudo systemctl daemon-reload ; sudo systemctl enable nix.mount ; sudo systemctl 
 
 After you have configured SELinux (and if you are on Silverblue, configured a `/nix` mount), it's time to install [Nix](https://github.com/NixOS/nix).
 
-### Step 7
+### Step 8
 
 Temorarly set selinux to "permissive"
 
@@ -174,13 +188,13 @@ sudo setenforce Permissive
 ```
 
 
-### Step 8 Install nix
+### Step 9 Install nix
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
-## Step 9 Copy Service Files
+## Step 10 Copy Service Files
 
 now copy the service file
 
@@ -219,13 +233,13 @@ sudo systemctl enable --now nix-daemon.socket
 
 ## Finishing up
 
-### Step 10 Enable selinux
+### Step 11 Enable selinux
 
 ```bash
 sudo setenforce Enforcing
 ```
 
-### Step 11 Reboot your system
+### Step 12 Reboot your system
 
 reboot the system for the changes to take effect
 
