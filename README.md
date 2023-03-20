@@ -33,3 +33,5 @@ wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverb
 # [Manual Install Guide](https://github.com/dnkmmr69420/nix-with-selinux/blob/main/manual-install-guide.md)
 
 I gave it its own readme to make this guide less cluttered. Click on the link above to take you to that page.
+
+Want to uninstall nix? I made uninstallers for it [here](https://github.com/dnkmmr69420/nix-uninstallers).
