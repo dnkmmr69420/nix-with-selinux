@@ -67,7 +67,7 @@ sudo setenforce Permissive
 
 sleep 1
 
-echo "Preparring the nix install script"
+echo "Prepareing the nix install script"
 
 sleep 5
 
