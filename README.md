@@ -34,7 +34,7 @@ wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverb
 
 This installer is a modified version of mine and it is meant for ublue's bluefin but should run fine on regular silverblue and other ublue spins. 
 
-DON"T USE THIS AT THE MOMENT SINCE IT CURRENTLY DOES NOT WORK. You are welcome to test it but do it in a vm.
+DON'T USE THIS AT THE MOMENT SINCE IT CURRENTLY DOES NOT WORK. You are welcome to test it but do it in a vm.
 
 ```bash
 wget https://raw.githubusercontent.com/ublue-os/bluefin/main/usr/bin/ublue-nix-install && chmod a+x ./ublue-nix-install && ./ublue-nix-install ; rm ./ublue-nix-install
