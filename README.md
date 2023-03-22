@@ -30,9 +30,11 @@ wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverblue-installer.sh && chmod a+x ./silverblue-installer.sh && ./silverblue-installer.sh ; rm ./silverblue-installer.sh
 ```
 
-## [Ublue nix installer](https://github.com/ublue-os/bluefin/blob/main/usr/bin/ublue-nix-install)
+## [Ublue nix installer](https://github.com/ublue-os/bluefin/blob/main/usr/bin/ublue-nix-install) Currently doesn't work
 
-This installer is a modified version of mine and it is meant for ublue's bluefin but should run fine on regular silverblue and other ublue spins
+This installer is a modified version of mine and it is meant for ublue's bluefin but should run fine on regular silverblue and other ublue spins. 
+
+DON"T USE THIS AT THE MOMENT SINCE IT CURRENTLY DOES NOT WORK. You are welcome to test it but do it in a vm.
 
 ```bash
 wget https://raw.githubusercontent.com/ublue-os/bluefin/main/usr/bin/ublue-nix-install && chmod a+x ./ublue-nix-install && ./ublue-nix-install ; rm ./ublue-nix-install
