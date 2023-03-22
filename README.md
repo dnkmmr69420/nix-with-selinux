@@ -30,6 +30,16 @@ wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/silverblue-installer.sh && chmod a+x ./silverblue-installer.sh && ./silverblue-installer.sh ; rm ./silverblue-installer.sh
 ```
 
+## [Ublue nix installer](https://github.com/ublue-os/bluefin/blob/main/usr/bin/ublue-nix-install)
+
+This installer is a modified version of mine and it is meant for ublue's bluefin but should run fine on regular silverblue and other ublue spins
+
+```bash
+wget https://raw.githubusercontent.com/ublue-os/bluefin/main/usr/bin/ublue-nix-install && chmod a+x ./ublue-nix-install && ./ublue-nix-install ; rm ./ublue-nix-install
+```
+
+thanks [castrojo](https://github.com/castrojo)
+
 # [Manual Install Guide](https://github.com/dnkmmr69420/nix-with-selinux/blob/main/manual-install-guide.md)
 
 I gave it its own readme to make this guide less cluttered. Click on the link above to take you to that page.
