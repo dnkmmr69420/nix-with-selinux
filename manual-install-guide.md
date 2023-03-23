@@ -238,6 +238,12 @@ systemctl reboot
 
 ## Optional Steps
 
+### Install nix backup before using nix at all
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/create-backup.sh)
+```
+
 ### modify nix-daemon to add units to bind nix.mount
 
 Optionally, you may manually modify the `nix-daemon` units to add a bind to `nix.mount` to ensure the units activate and deactivate properly if the mount fails or if the mount is unmounted while the daemon is running.  Place the following at the bottom of the `[Unit]` section in both the `nix-daemon.socket` and `nix-daemon.service` units.
