@@ -41,5 +41,11 @@ sudo setenforce Enforcing
 
 sleep 1
 
+echo "Making a nix backup"
+
+bash <(curl -s https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/create-backup.sh)
+
+sleep 1
+
 echo "Reboot your system by typing"
 echo "systemctl reboot"
