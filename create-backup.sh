@@ -2,6 +2,8 @@
 
 # nb stands for nix backup
 
+echo "Installing nix backup"
+
 sudo mkdir /opt/nb
 sudo cp -R /nix /opt/nb
 
@@ -13,3 +15,6 @@ sudo mkdir -p /nix
 sudo cp -R /opt/nb/nix/* /nix/*
 sudo restorecon -RF /nix
 sudo echo "Nix has been restored. Reboot for changes to apply."
+EOF
+
+sudo echo "Finnished installing nix backup"
