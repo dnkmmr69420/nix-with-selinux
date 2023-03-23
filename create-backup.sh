@@ -12,7 +12,7 @@ sudo tee /opt/nb/reset-nix <<EOF
 sudo echo "Restoring nix..."
 sudo rm -rf /nix/*
 sudo mkdir -p /nix
-sudo cp -R /opt/nb/nix/* /nix/*
+sudo cp -R /opt/nb/nix/* /nix/
 sudo restorecon -RF /nix
 sudo echo "Nix has been restored. Reboot for changes to apply."
 EOF
