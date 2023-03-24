@@ -18,7 +18,7 @@ Want to improve this documentation, submit a [request](https://github.com/dnkmmr
 
 Copy and paste the correct installer for your linux distro into the terminal to install
 
-## Regular installer for muttable linux with selinux
+## Regular installer for mutable linux with selinux
 
 ```bash
 wget https://raw.githubusercontent.com/dnkmmr69420/nix-with-selinux/main/regular-installer.sh && chmod a+x ./regular-installer.sh && ./regular-installer.sh ; rm ./regular-installer.sh
