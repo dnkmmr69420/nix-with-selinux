@@ -61,7 +61,7 @@ It has its own [guide](https://github.com/dnkmmr69420/nix-graphical-app-icon-gui
 add this to the end of `~/.bashrc`
 
 ```bash
-XDG_DATA_DIRS="$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
+XDG_DATA_DIRS="~/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
 ```
 
 #### Multiuser
@@ -70,7 +70,7 @@ type this command
 
 ```bash
 sudo tee /etc/profile.d/nix-app-icons.sh <<EOF
-XDG_DATA_DIRS="$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
+XDG_DATA_DIRS="~/.nix-profile/share:/nix/var/nix/profiles/default/share:$XDG_DATA_DIRS"
 EOF
 ```
 
