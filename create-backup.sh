@@ -9,7 +9,7 @@ sudo cp -R /nix /opt/nb
 
 sudo tee /opt/nb/reset-nix <<EOF
 #!/bin/bash
-sudo echo "Resettinging nix..."
+sudo echo "Resetting nix..."
 sudo rm -rf /nix/*
 sudo mkdir -p /nix
 sudo cp -R /opt/nb/nix/* /nix/
