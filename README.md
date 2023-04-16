@@ -1,4 +1,6 @@
-# Nix package manager on Fedora with selinux enabled 
+# Nix package manager on Fedora with selinux enabled
+
+I moved all of my nix stuff to [This](https://github.com/dnkmmr69420/nix-installer-scripts)
 
 This page is for the nix selinux installers. Click [here](https://github.com/dnkmmr69420/nix-installers) to go to the main page. The regular installer makes a backup of the default of nix in /opt/nb just like the installers here. There are commands to run the nix with selinux installers on the [main nix installers page](https://github.com/dnkmmr69420/nix-installers) too
 
